@@ -1,0 +1,191 @@
+* {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+html {
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    -webkit-overflow-scrolling : touch !important;
+    touch-action: manipulation;
+}
+
+body {
+    margin: 0px; padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em; line-height: 1.5; color: #555;
+    background-color: #f9f9f9;
+}
+
+*, *:focus, *:hover {
+    outline: 0;	outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.center { text-align: center; }
+
+input, select {
+    font-family: 'Roboto', sans-serif;
+    width: 100%; height: 30px; text-indent: 5px;
+    margin-bottom: 10px; border: 1px #ccc solid;
+    border-radius: 3px; margin-top: 3px;
+    font-size: 0.9rem;
+}
+
+.button {
+    text-align: center; margin: 5px auto;
+    height: 30px; line-height: 30px; width: 60%; transition: 0.25s;
+    background-color: #2196f3; font-size: 1.2em; padding: 0px 10px;
+    cursor: pointer; color: #fff; border-radius: 3px;
+}
+
+.button:hover {
+    transition: 0.25s;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+}
+
+#header {
+    position: fixed; background-color: #efefef; z-index: 100; line-height: 50px;
+    height: 60px; line-height: 60px; width: 100%; padding: 0px 10px; overflow: hidden;
+    margin: 0px; box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#header a {
+    float: left;
+    color: #555;
+    font-size: 1.75em;
+    transition: 0.25s;
+    text-decoration: none;
+}
+
+#header a:hover {
+    color: #000;
+    transition: 0.25s;
+}
+
+#header div {
+    float: right;
+    line-height: 15px;
+    text-align: center;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: 0.25s;
+    margin: 10px;
+    color: #666;
+}
+
+#header div i {
+    font-size: 2em;
+}
+
+#header div:hover {
+    color: #000;
+    transition: 0.25s;
+}
+
+#content {
+    padding: 70px 10px 10px 10px;
+    margin: 0px; width: 100%;
+}
+
+#message {
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#message div {
+    display: none;
+    cursor: default;
+    font-size: 0.9em;
+    border-radius: 3px;
+    width: 100%; height: 40px;
+    line-height: 40px; text-align: center;
+}
+
+.error {
+    background-color: #fb9696;
+    color: #962c2c;
+}
+
+.success {
+    background-color: #9fca93;
+    color: #5d8044;
+}
+
+.modal {
+    position: fixed; display: flex;
+    width: 100%; height: 100vh; z-index: 101;
+    background-color: rgba(0, 0, 0, 0.1); 
+    justify-content: center;
+    align-items: center;
+}
+
+.mcontent {
+    flex: 1; border-radius: 3px; 
+    max-width: 300px; padding: 5px;
+    background-color: #2196f3;
+}
+
+.mtitle {
+    color: #fff; font-size: 1.1em;
+    padding: 0px 5px 5px 5px; cursor: default;
+}
+.mtitle i { float: right; cursor: pointer; transition: 0.25s; font-size: 1.25em; }
+.mtitle i:hover { transition: 0.25s; color: #777; }
+
+.mhtml {
+    width: 100%; background-color: #fff;
+    min-height: 100px; padding: 10px;
+    font-size: 0.9em;
+}
+
+#main {
+    max-width: 1024px;
+    width: 100%; margin: 0px auto;
+}
+
+.projects {
+    margin-bottom: 25px;
+}
+
+.title {
+    text-indent: 5px; padding-bottom: 3px;
+    border-bottom: 1px #ccc solid;
+    font-size: 1.1em;
+}
+
+.title span {
+    float: right;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: 0.25s;
+    color: #0275ef;
+    font-size: 0.9em;
+}
+
+.title span i { font-size: 1.25em; vertical-align: -10%; }
+
+.title span:hover {
+    transition: 0.25s;
+    color: #777;
+}
+
+.project {
+    float: left; vertical-align: top;
+    width: 23%; margin: 1%; height: 40px;
+    background-color: #999; color: #fff;
+    line-height: 40px; text-align: center;
+    font-size: 1em; cursor: pointer; overflow: hidden;
+    border-radius: 2px; transition: 0.25s;
+}
+
+.project:hover {
+    transition: 0.25s;
+    background-color: #555;
+}
+
+.pactive {
+    pointer-events: none;
+    background-color: #555;
+}
