@@ -10,7 +10,7 @@ var projectID;
 // The users object
 var users = {
     faroch: {name: 'Faroch Mehri', password: 'faroch'},
-    ulrika: {name: 'Ulrika Mansson', password: 'ulrika'},
+    ulrika: {name: 'Ulrika Månsson', password: 'ulrika'},
     anders: {name: 'Anders Hagelkvist', password: 'anders'}, 
     emil  : {name: 'Emil Wärdig Tsoukalas', password: 'emil'},
     joel  : {name: 'Joel Månesköld', password: 'joel'},
@@ -61,7 +61,7 @@ var modalHTML = function(type, param) {
     
     if(type == 0) {
         title    = 'Logga in';
-        content  = '<form><label>Användare namn</label>';
+        content  = '<form><label>Användarnamn</label>';
         content += '<input id="username" type="text" />';
         content += '<label>Lösenord</label>';
         content += '<input id="password" type="password" />';
@@ -69,9 +69,9 @@ var modalHTML = function(type, param) {
 
     } else if(type == 1) {
         title    = 'Skapa projekt';
-        content  = '<label>Projekt namn</label>';
+        content  = '<label>Projektnamn</label>';
         content += '<input id="pname" type="text" />';
-        content += '<div class="button" onclick="createProject()">Skapa projektet</div>';
+        content += '<div class="button" onclick="createProject()">Skapa projekt</div>';
         
     } else return false;
     
@@ -97,9 +97,9 @@ var signIn = function() {
             sessionStorage.setItem('userID', username);
             window.location.reload();
             
-        } else showMessage('error', 'The password is wrong.');
+        } else showMessage('error', 'Fel lösenord.');
         
-    } else showMessage('error', 'The username is wrong.');
+    } else showMessage('error', 'Fel användarnamn.');
 };
 
 var signOut = function() {
@@ -109,7 +109,7 @@ var signOut = function() {
 
 var createProject = function() {
     var pname = $('#pname').val().trim();
-    if(pname == '') showMessage('error', 'Please enter the project name!');
+    if(pname == '') showMessage('error', 'Ange projektnamn!');
     else {
         var temp = {
             name   : pname,
@@ -118,16 +118,18 @@ var createProject = function() {
             column2: [],
             column3: [],
             issues : [],
-            logbok : ['['+(new Date()).toLocaleString()+'] '+users[userID].name+' Created the project.']
+            logbok : ['['+(new Date()).toLocaleString()+'] '+users[userID].name+' skapade projektet.']
         };
         projects.push(temp); 
         localStorage.setItem('projects', JSON.stringify(projects));
-        showMessage('success', 'The project was created successfully.');
+        showMessage('success', 'Projektet skapades.');
         showProjects(); closeModal();
     }
 };
 
+ 
 var showProjects = function() {
+    
     var html = '';
     if(projects.length) {
         for(var object of projects) {
