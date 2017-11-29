@@ -189,3 +189,16 @@ input, select {
     pointer-events: none;
     background-color: #555;
 }
+
+
+@media (max-width: 384px) {
+    .project { width: 98%; font-size: 1.5em; }
+}
+
+@media (min-width: 385px) and (max-width: 414px) {
+    .project { width: 48%; }
+}
+
+@media (min-width: 415px) and (max-width: 600px) {
+    .project { width: 31.33333%; }
+}
