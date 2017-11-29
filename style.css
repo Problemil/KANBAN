@@ -128,8 +128,8 @@ input, select {
 }
 
 .mtitle {
-    color: #fff; font-size: 1.1em;
-    padding: 0px 5px 5px 5px; cursor: default;
+    color: #fff; cursor: default;
+    padding: 0px 5px 5px 5px; 
 }
 .mtitle i { float: right; cursor: pointer; transition: 0.25s; font-size: 1.25em; }
 .mtitle i:hover { transition: 0.25s; color: #777; }
@@ -168,7 +168,7 @@ input, select {
 
 .title span:hover {
     transition: 0.25s;
-    color: #777;
+    color: #698cb1;
 }
 
 .project {
@@ -189,6 +189,31 @@ input, select {
     pointer-events: none;
     background-color: #555;
 }
+
+
+.columns {
+    width: 100%;   
+}
+
+.column {
+    float: left; vertical-align: top;
+    width: 23%; margin: 0px 1%; font-size: 0.9em;
+    
+    height: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media (max-width: 384px) {
