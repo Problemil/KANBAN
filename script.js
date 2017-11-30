@@ -134,7 +134,7 @@ var showProject = function() {
     // in every column add a div with class = title
     // in every title add the text and a issue creation function (issueModal)
     // the function should get a parameter (index of the column)
-    // appaned columns to the #main
+    // append columns to the #main
 
     var html = '';
     $('.columns').remove();
