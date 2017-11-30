@@ -167,8 +167,13 @@ var showProject = function() {
     //
 };
 
-var showIssues = function(index) {
-    
+var showIssues = function() {
+   
+   var html
+   html =+ '<div class="issue">'
+   html =+ '<div class="title"><span onclick="moveModal(columnIndex, issueIndex)"<i class="fa fa-pencil-square-o"></i> Flytta</span></div>'
+   html =+ '</div>'
+   $('.column').eq(0).append(issue);
 };
 
 var issueModal = function(index) {
