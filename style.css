@@ -235,11 +235,18 @@ input, select {
     margin: 0px; padding: 2px;
 }
 
+@media (max-width: 560px) {
+    .column { width: 98%; margin-top: 25px; }
+}
 
+@media (min-width: 561px) and (max-width: 1050px) {
+    .column { width: 48%; }
+    .column:nth-child(3), .column:nth-child(4) { margin-top: 25px; }
+}
 
-
-
-
+@media (max-width: 480px) {
+    .logbok p { font-size: 0.75em; }
+}
 
 @media (max-width: 384px) {
     .project { width: 98%; font-size: 1.5em; }

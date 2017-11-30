@@ -198,7 +198,39 @@ var addIssue = function(column) {
 };
 
 var moveModal = function(cIndex, iIndex) {
-    
+    var content, title = 'Flytta issue';
+    var kolumner = ['Att göra', 'På gång', 'Testa', 'Klar'];
+    content  = '<label>Flytta till</label>';
+    content += '<select id="kolumner">';
+    for(var key in kolumner) {
+        if(cIndex == key) content += '<option value="'+key+'" selected> '+kolumner[key]+'</option>';
+        else content += '<option value="'+key+'"> '+kolumner[key]+'</option>';
+    }    
+    content += '</select>';
+    content += '<div class="button" onclick="moveIssue('+cIndex+', '+iIndex+')">Flytta issue</div>';
+    showModal(title, content); 
+};
+
+var moveIssue = function(column, issue) {
+    var project = projects[projectID];
+    var till = Number($('#kolumner').val());
+    if(column != till) {
+        var html  = '', temp;
+        var index = project.columns[column].indexOf(issue);
+        project.columns[column].splice(index, 1);
+        project.columns[till].push(issue);
+        $('.column').eq(column).children('.issue').eq(index).remove();
+        temp = projects[projectID].issues[issue];
+        html += '<div class="issue">';
+        html += '<div class="title">['+(issue + 1)+'] '+users[temp.user].name;
+        html += '<span onclick="moveModal('+till+', '+issue+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
+        html += '<div class="text">'+temp.text+'</div></div>';
+        $('.column').eq(till).append(html);
+        
+        var temp = ['Att göra', 'På gång', 'Testa', 'Klar'];
+        addLog('flyttade issue #'+(issue + 1)+' från kolumn "'+temp[column]+'" till kolumn "'+temp[till]+'"');
+    }
+    closeModal();
 };
 
 var addLog = function(text) {
