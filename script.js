@@ -98,7 +98,7 @@ var createProject = function() {
     if(pname == '') showMessage('error', 'Ange projektnamn!');
     else {
         var temp = {
-            name   : pname, columns: [], issues: [],
+            name   : pname, columns: [[],[],[],[]], issues: [],
             logbok : ['['+(new Date()).toLocaleString()+'] '+users[userID].name+' skapade projektet.']
         };
         projects.push(temp); 
@@ -139,20 +139,9 @@ var showProject = function() {
     showColumns();
     showIssues();
     showLog();
-    
-    console.log(projects[projectID]);
-    
-    /**** SHOW COLUMNS ****/
-    // if columns exists; remove it
-    // create a container with class = columns
-    // add 4 div with class = column
-    // in every column add a div with class = title
-    // in every title add the text and a issue creation function (issueModal)
-    // the function should get a parameter (index of the column)
-    // append columns to the #main
+};
 
-
-    
+var showIssues = function() {
     /**** SHOW ISSUES ****/
     // show issues for all the columns
     /*
@@ -162,16 +151,10 @@ var showProject = function() {
         </div>
     */
     // $('.column').eq(0).append(issue);
-    
-    /**** SHOW LOGBOK ****/
-    //
-};
-
-var showIssues = function(index) {
-    
 };
 
 var issueModal = function(column) {
+<<<<<<< HEAD
     var content, title = 'Skapa kort';
     content  = '<label>Beskrivning</label>';
     content += '<input id="issue" type="text"/>';
@@ -185,9 +168,41 @@ var issueModal = function(column) {
     showModal(title, content);
 }
 
+=======
+    var content, title = 'Skapa issue';
+    content  = '<label>Beskrivning</label>';
+    content += '<input id="issue" type="text" />';
+    content += '<label>Ansvarig</label>';
+    content += '<select id="user">';
+    content += '<option value=""> Välj ansvarig användare</option>';
+    for(var key in users) {
+        content += '<option value="'+key+'"> '+users[key].name+'</option>';
+    }    
+    content += '</select>';
+    content += '<div class="button" onclick="addIssue('+column+')">Skapa issue</div>';
+    showModal(title, content); 
+};
+>>>>>>> c1f3ba85707b521856b7568529b5e0133fb38ee0
 
 var addIssue = function(column) {
-    
+    var issue = $('#issue').val().trim();
+    if(issue == '') showMessage('error', 'Ange beskrivning');
+    else {
+        var user = $('#user').val();
+        if(user == '') showMessage('error', 'Välj användare');
+        else {
+            var temp = {
+                text: issue,
+                user: user
+            };
+            projects[projectID].issues.push(temp);
+            temp = projects[projectID].issues.length - 1;
+            projects[projectID].columns[column].push(temp);
+            showMessage('success', 'Issue skapades');
+            addLog('skapade issue #'+ (temp + 1));
+            closeModal();
+        }
+    }
 };
 
 var moveModal = function(cIndex, iIndex) {
@@ -195,8 +210,10 @@ var moveModal = function(cIndex, iIndex) {
 };
 
 var addLog = function(text) {
+    text = '['+(new Date()).toLocaleString()+'] '+users[userID].name + ' ' + text;
     projects[projectID].logbok.push(text);
     localStorage.setItem('projects', JSON.stringify(projects));
+    
 };
 
 var showLog = function() {
