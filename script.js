@@ -6,7 +6,7 @@ var users = {
     ulrika: {name: 'Ulrika Månsson', password: 'ulrika'},
     anders: {name: 'Anders Hagelkvist', password: 'anders'}, 
     emil  : {name: 'Emil Wärdig Tsoukalas', password: 'emil'},
-    joel  : {name: 'Joel Månesköld', password: 'joel'},
+    joel  : {name: 'Joel', password: 'joel'},
     janne : {name: 'Janne Kemi', password: 'janne'}
 };
 
@@ -171,9 +171,20 @@ var showIssues = function(index) {
     
 };
 
-var issueModal = function(index) {
-    
-};
+var issueModal = function(column) {
+    var content, title = 'Skapa kort';
+    content  = '<label>Beskrivning</label>';
+    content += '<input id="issue" type="text"/>';
+    content += '<label>Tilldela uppgift til</label>';
+    content += '<select id="user">';
+    for (var key in users) {
+        content += '<option value="'+key+'"> '+users[key].name+'</option>';
+    }
+    content += '</select>';
+    content += '<div class="button" onclick="addIssue('+column+')">Skapa issue</div>';
+    showModal(title, content);
+}
+
 
 var addIssue = function(column) {
     
