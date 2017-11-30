@@ -123,13 +123,13 @@ input, select {
 
 .mcontent {
     flex: 1; border-radius: 3px; 
-    max-width: 300px; padding: 5px;
+    max-width: 360px; padding: 5px;
     background-color: #2196f3;
 }
 
 .mtitle {
-    color: #fff; font-size: 1.1em;
-    padding: 0px 5px 5px 5px; cursor: default;
+    color: #fff; cursor: default;
+    padding: 0px 5px 5px 5px; 
 }
 .mtitle i { float: right; cursor: pointer; transition: 0.25s; font-size: 1.25em; }
 .mtitle i:hover { transition: 0.25s; color: #777; }
@@ -151,7 +151,7 @@ input, select {
 
 .title {
     text-indent: 5px; padding-bottom: 3px;
-    border-bottom: 1px #ccc solid;
+    border-bottom: 1px #999 solid;
     font-size: 1.1em;
 }
 
@@ -168,7 +168,7 @@ input, select {
 
 .title span:hover {
     transition: 0.25s;
-    color: #777;
+    color: #698cb1;
 }
 
 .project {
@@ -176,7 +176,7 @@ input, select {
     width: 23%; margin: 1%; height: 40px;
     background-color: #999; color: #fff;
     line-height: 40px; text-align: center;
-    font-size: 1em; cursor: pointer; overflow: hidden;
+    font-size: 0.95em; cursor: pointer; overflow: hidden;
     border-radius: 2px; transition: 0.25s;
 }
 
@@ -189,6 +189,51 @@ input, select {
     pointer-events: none;
     background-color: #555;
 }
+
+
+.columns {
+    width: 100%;   
+}
+
+.column {
+    float: left; vertical-align: top;
+    width: 23%; margin: 0px 1%; font-size: 0.85em;
+}
+
+.issue {
+    width: 98%; margin: 10px 1%; padding: 5px; color: #fff;
+    background-color: #555; border-radius: 2px; 
+    transition: 0.25s; cursor: default;
+    font-size: 0.75em;
+}
+
+.issue .title { border-bottom: 1px #fff dotted; }
+
+.issue .title span {
+    font-size: 1.1em;
+    transition: 0.25s;
+    color: #bbb;
+}
+
+.issue .title span:hover {
+    transition: 0.25s;
+    color: #fff;
+}
+
+.issue .text {
+    padding: 3px;
+    font-size: 1.25em;
+    color: #a4c9d8;
+}
+
+
+
+
+
+
+
+
+
 
 
 @media (max-width: 384px) {

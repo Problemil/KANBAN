@@ -1,13 +1,6 @@
-// Logged in user
 var userID;
-
-// The projects object
 var projects;
-
-// Selected project 
 var projectID;
-
-// The users object
 var users = {
     faroch: {name: 'Faroch Mehri', password: 'faroch'},
     ulrika: {name: 'Ulrika Månsson', password: 'ulrika'},
@@ -26,13 +19,13 @@ $(document).ready(function(){
         var html;
         $('#header').append('<div onclick="signOut()"><i class="fa fa-sign-out"></i><br/>Logga ut</div>');
         html  = '<div class="projects"><div class="title">Projekten';
-        html += '<span onclick="modalHTML(1)"><i class="fa fa-building">';
+        html += '<span onclick="projectModal()"><i class="fa fa-building">';
         html += '</i> Skapa</span></div><div id="pcontent"></div></div>';
         $('#main').html(html);
         showProjects();
         
     } else {
-        $('#header').append('<div onclick="modalHTML(0)"><i class="fa fa-sign-in"></i><br/>Logga in</div>');
+        $('#header').append('<div onclick="logginModal()"><i class="fa fa-sign-in"></i><br/>Logga in</div>');
         $('#main').html('<h1 class="center">Kanban</h1>');
     }
     
@@ -52,34 +45,27 @@ var showMessage = function(status, message) {
     $('.'+status).delay(4000).slideUp(400, function(){ $(this).remove(); });
 };
 
-// type:
-// 0 => Sign In
-// 1 => Create Project
-var modalHTML = function(type, param) {
-    var title;
-    var content;
-    
-    if(type == 0) {
-        title    = 'Logga in';
-        content  = '<form><label>Användarnamn</label>';
-        content += '<input id="username" type="text" />';
-        content += '<label>Lösenord</label>';
-        content += '<input id="password" type="password" />';
-        content += '<div class="button" onclick="signIn()">Logga in</div><form>';     
+var logginModal = function() {
+    var content, title = 'Logga in';
+    content  = '<form><label>Användarnamn</label>';
+    content += '<input id="username" type="text" />';
+    content += '<label>Lösenord</label>';
+    content += '<input id="password" type="password" />';
+    content += '<div class="button" onclick="signIn()">Logga in</div><form>';
+    showModal(title, content);
+};
 
-    } else if(type == 1) {
-        title    = 'Skapa projekt';
-        content  = '<label>Projektnamn</label>';
-        content += '<input id="pname" type="text" />';
-        content += '<div class="button" onclick="createProject()">Skapa projekt</div>';
-        
-    } else return false;
-    
+var projectModal = function() {
+    var content, title = 'Skapa projekt';
+    content  = '<label>Projektnamn</label>';
+    content += '<input id="pname" type="text" />';
+    content += '<div class="button" onclick="createProject()">Skapa projekt</div>';
     showModal(title, content);
 };
 
 var showModal = function(title, content) {
-    var html; $('.modal').remove();
+    var html;
+    closeModal();
     html  = '<div class="modal"><div class="mcontent">';
     html += '<div class="mtitle">'+title+'<i class="fa fa-times" onclick="closeModal()"></i></div>';
     html += '<div class="mhtml">'+content+'</div></div></div>';
@@ -112,18 +98,14 @@ var createProject = function() {
     if(pname == '') showMessage('error', 'Ange projektnamn!');
     else {
         var temp = {
-            name   : pname,
-            column0: [],
-            column1: [],
-            column2: [],
-            column3: [],
-            issues : [],
+            name   : pname, columns: [], issues: [],
             logbok : ['['+(new Date()).toLocaleString()+'] '+users[userID].name+' skapade projektet.']
         };
         projects.push(temp); 
         localStorage.setItem('projects', JSON.stringify(projects));
         showMessage('success', 'Projektet skapades.');
-        showProjects(); closeModal();
+        showProjects();
+        closeModal();
     }
 };
 
@@ -142,8 +124,50 @@ var showProjects = function() {
     if(projectID != undefined) $('.project').eq(projectID).addClass('pactive');
 };
 
-var showProject = function(index) {
-    console.dir(projects[projectID]);
+var showProject = function() {
+    console.log(projects[projectID]);
+    
+    /**** SHOW COLUMNS ****/
+    // if columns exists; remove it
+    // create a container with class = columns
+    // add 4 div with class = column
+    // in every column add a div with class = title
+    // in every title add the text and a issue creation function (issueModal)
+    // the function should get a parameter (index of the column)
+    // appaned columns to the #main
+
+    var html = '';
+    $('.columns').remove();
+    html += '<div class="columns">';    
+    html += '<div class="column"><div class="title">Att göra<span onclick="issueModal(0)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
+    html += '<div class="column"><div class="title">På gång<span onclick="issueModal(1)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
+    html += '<div class="column"><div class="title">Testa<span onclick="issueModal(2)"><i class="fa fa-file"></i> Skapa</span></div></div>';        
+    html += '<div class="column"><div class="title">Klar<span onclick="issueModal(3)"><i class="fa fa-file"></i> Skapa</span></div></div>';
+    html += '<div style="clear:both;"></div></div>';
+    $('#main').append(html);
+    
+    /**** SHOW ISSUES ****/
+    // show issues for all the columns
+    /*
+        <div class="issue">
+            <div class="title">Janne Kemi<span onclick="moveModal(columnIndex, issueIndex)"><i class="fa fa-pencil-square-o"></i> Flytta</span></div>
+            <div class="text">Axdasd sad sdad sad Axdasd sad sdad sad</div>
+        </div>
+    */
+    // $('.column').eq(0).append(issue);
+    
+    /**** SHOW LOGBOK ****/
+    //
+};
+
+
+var issueModal = function(index) {
+    
+};
+
+
+var moveModal = function(cIndex, iIndex) {
+    
 };
 
 var Log = function(text) {
