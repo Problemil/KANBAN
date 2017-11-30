@@ -197,6 +197,7 @@ input, select {
 
 .column {
     float: left; vertical-align: top;
+<<<<<<< HEAD
     width: 23%; margin: 0px 1%; font-size: 0.85em;
 }
 
@@ -225,6 +226,16 @@ input, select {
     font-size: 1.25em;
     color: #a4c9d8;
 }
+=======
+    width: 23%; margin: 0px 1%; font-size: 0.9em;
+    
+    height: 300px;
+}
+
+
+
+
+>>>>>>> 828a468e1ee57ba7e2b40e7e1ff160cb757c4b6f
 
 
 
