@@ -139,39 +139,21 @@ var showProject = function() {
     showColumns();
     showIssues();
     showLog();
-    
-<<<<<<< HEAD
-    //console.log(projects[projectID]);
-
-=======
-    console.log(projects[projectID]);
-    
-    /**** SHOW COLUMNS ****/
-    // if columns exists; remove it
-    // create a container with class = columns
-    // add 4 div with class = column
-    // in every column add a div with class = title
-    // in every title add the text and a issue creation function (issueModal)
-    // the function should get a parameter (index of the column)
-    // append columns to the #main
->>>>>>> 21852e9c130f47d717e2be5484c9ab59ed486c4a
-
-    
-
-    
-    /**** SHOW LOGBOK ****/
 };
 
 var showIssues = function() {
-    /**** SHOW ISSUES ****/
-    // show issues for all the columns
-    /*
-        <div class="issue">
-            <div class="title">Janne Kemi<span onclick="moveModal(columnIndex, issueIndex)"><i class="fa fa-pencil-square-o"></i> Flytta</span></div>
-            <div class="text">Axdasd sad sdad sad Axdasd sad sdad sad</div>
-        </div>
-    */
-    // $('.column').eq(0).append(issue);
+    var project = projects[projectID];
+    for(var column in project.columns) {
+        var html = '';
+        for(var issueid of project.columns[column]) {
+            var temp = project.issues[issueid];
+            html += '<div class="issue">';
+            html += '<div class="title">['+(issueid + 1)+'] '+users[temp.user].name;
+            html += '<span onclick="moveModal('+column+', '+issueid+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
+            html += '<div class="text">'+temp.text+'</div></div>';
+        }
+        $('.column').eq(column).append(html);
+    }
 };
 
 var issueModal = function(column) {
@@ -193,18 +175,23 @@ var addIssue = function(column) {
     var issue = $('#issue').val().trim();
     if(issue == '') showMessage('error', 'Ange beskrivning');
     else {
-        var user = $('#user').val();
-        if(user == '') showMessage('error', 'Välj användare');
+        var userid = $('#user').val();
+        if(userid == '') showMessage('error', 'Välj användare');
         else {
-            var temp = {
-                text: issue,
-                user: user
-            };
+            var html = '';
+            var temp = {text: issue, user: userid};
             projects[projectID].issues.push(temp);
             temp = projects[projectID].issues.length - 1;
             projects[projectID].columns[column].push(temp);
-            showMessage('success', 'Issue skapades');
             addLog('skapade issue #'+ (temp + 1));
+
+            html += '<div class="issue">';
+            html += '<div class="title">['+(temp + 1)+'] '+users[userid].name;
+            html += '<span onclick="moveModal('+column+', '+temp+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
+            html += '<div class="text">'+issue+'</div></div>';
+            $('.column').eq(column).append(html);
+            
+            showMessage('success', 'Issue skapades');
             closeModal();
         }
     }
@@ -218,9 +205,16 @@ var addLog = function(text) {
     text = '['+(new Date()).toLocaleString()+'] '+users[userID].name + ' ' + text;
     projects[projectID].logbok.push(text);
     localStorage.setItem('projects', JSON.stringify(projects));
-    
+    $('<p>'+text+'</p>').insertAfter('.logbok .title');
 };
 
 var showLog = function() {
-    console.dir(projects[projectID].logbok);
+    var html = '';
+    $('.logbok').remove();
+    html += '<div class="logbok">';
+    html += '<div class="title">Logbok</div></div>';
+    $('#main').append(html);
+    for(var text of projects[projectID].logbok) {
+        $('<p>'+text+'</p>').insertAfter('.logbok .title');
+    }
 };

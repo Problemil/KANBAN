@@ -204,7 +204,7 @@ input, select {
     width: 98%; margin: 10px 1%; padding: 5px; color: #fff;
     background-color: #555; border-radius: 2px; 
     transition: 0.25s; cursor: default;
-    font-size: 0.75em;
+    font-size: 0.85em;
 }
 
 .issue .title { border-bottom: 1px #fff dotted; }
@@ -226,9 +226,14 @@ input, select {
     color: #a4c9d8;
 }
 
+.logbok {
+    margin: 50px auto;
+}
 
-
-
+.logbok p {
+    font-size: 0.9em;
+    margin: 0px; padding: 2px;
+}
 
 
 
