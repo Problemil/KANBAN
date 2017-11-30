@@ -167,7 +167,7 @@ var showProject = function() {
     //
 };
 
-var showIssues = function(index) {
+var showIssues = function() {
     
 };
 
@@ -176,7 +176,23 @@ var issueModal = function(index) {
 };
 
 var addIssue = function(column) {
-    
+    var issue = $('#issue').val().trim();
+    if(issue == '') showMessage('error', 'Ange issue');
+    else {
+        var user = $('#user').val();
+        if(user == '') showMessage('error', 'Välj användare');
+        else {
+            var temp = {
+                text: issue,
+                user: user
+            };
+            projects[projectID].issues.push(temp);
+            temp = projects[projectID].issues.length - 1;
+            projects[projectID].columns[column].push(temp);
+            showMessage('success', 'Issue skapades');
+            addLog('skapade issue #'+temp);
+        }
+    }
 };
 
 var moveModal = function(cIndex, iIndex) {
