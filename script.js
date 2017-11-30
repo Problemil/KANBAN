@@ -124,7 +124,23 @@ var showProjects = function() {
     if(projectID != undefined) $('.project').eq(projectID).addClass('pactive');
 };
 
+var showColumns = function(){
+    var html = '';
+    $('.columns').remove();
+    html += '<div class="columns">';    
+    html += '<div class="column"><div class="title">Att göra<span onclick="issueModal(0)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
+    html += '<div class="column"><div class="title">På gång<span onclick="issueModal(1)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
+    html += '<div class="column"><div class="title">Testa<span onclick="issueModal(2)"><i class="fa fa-file"></i> Skapa</span></div></div>';        
+    html += '<div class="column"><div class="title">Klar<span onclick="issueModal(3)"><i class="fa fa-file"></i> Skapa</span></div></div>';
+    html += '<div style="clear:both;"></div></div>';
+    $('#main').append(html);  
+};
+
 var showProject = function() {
+    
+    showColumns();
+    showIssues();
+    showLog();
     console.log(projects[projectID]);
     
     /**** SHOW COLUMNS ****/
@@ -136,15 +152,7 @@ var showProject = function() {
     // the function should get a parameter (index of the column)
     // appaned columns to the #main
 
-    var html = '';
-    $('.columns').remove();
-    html += '<div class="columns">';    
-    html += '<div class="column"><div class="title">Att göra<span onclick="issueModal(0)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
-    html += '<div class="column"><div class="title">På gång<span onclick="issueModal(1)"><i class="fa fa-file"></i> Skapa</span></div></div>';    
-    html += '<div class="column"><div class="title">Testa<span onclick="issueModal(2)"><i class="fa fa-file"></i> Skapa</span></div></div>';        
-    html += '<div class="column"><div class="title">Klar<span onclick="issueModal(3)"><i class="fa fa-file"></i> Skapa</span></div></div>';
-    html += '<div style="clear:both;"></div></div>';
-    $('#main').append(html);
+
     
     /**** SHOW ISSUES ****/
     // show issues for all the columns
@@ -165,15 +173,17 @@ var issueModal = function(index) {
     
 };
 
+var addIssue = function(column) {
+    
+};
 
 var moveModal = function(cIndex, iIndex) {
     
 };
 
-var Log = function(text) {
+var addLog = function(text) {
     projects[projectID].logbok.push(text);
     localStorage.setItem('projects', JSON.stringify(projects));
-    showLog();
 };
 
 var showLog = function() {
