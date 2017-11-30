@@ -6,7 +6,7 @@ var users = {
     ulrika: {name: 'Ulrika Månsson', password: 'ulrika'},
     anders: {name: 'Anders Hagelkvist', password: 'anders'}, 
     emil  : {name: 'Emil Wärdig Tsoukalas', password: 'emil'},
-    joel  : {name: 'Joel', password: 'joel'},
+    joel  : {name: 'Joel Månesköld', password: 'joel'},
     janne : {name: 'Janne Kemi', password: 'janne'}
 };
 
@@ -157,21 +157,6 @@ var showIssues = function() {
 };
 
 var issueModal = function(column) {
-<<<<<<< HEAD
-    var content, title = 'Skapa kort';
-    content  = '<label>Beskrivning</label>';
-    content += '<input id="issue" type="text"/>';
-    content += '<label>Tilldela uppgift til</label>';
-    content += '<select id="user">';
-    for (var key in users) {
-        content += '<option value="'+key+'"> '+users[key].name+'</option>';
-    }
-    content += '</select>';
-    content += '<div class="button" onclick="addIssue('+column+')">Skapa issue</div>';
-    showModal(title, content);
-}
-
-=======
     var content, title = 'Skapa issue';
     content  = '<label>Beskrivning</label>';
     content += '<input id="issue" type="text" />';
@@ -185,7 +170,6 @@ var issueModal = function(column) {
     content += '<div class="button" onclick="addIssue('+column+')">Skapa issue</div>';
     showModal(title, content); 
 };
->>>>>>> c1f3ba85707b521856b7568529b5e0133fb38ee0
 
 var addIssue = function(column) {
     var issue = $('#issue').val().trim();
@@ -225,7 +209,6 @@ var addLog = function(text) {
 };
 
 var showLog = function() {
-<<<<<<< HEAD
     var html = '';
     $('.logbok').remove();
     html += '<div class="logbok">';
@@ -235,7 +218,3 @@ var showLog = function() {
         $('<p>'+text+'</p>').insertAfter('.logbok .title');
     }
 };
-=======
-    console.dir(projects[projectID].logbok);
-};
->>>>>>> 3390dc66545b032b89820633809ac45f7f6a166a
