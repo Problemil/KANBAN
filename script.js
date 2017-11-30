@@ -139,11 +139,7 @@ var showProject = function() {
     // in every title add the text and a issue creation function (issueModal)
     // the function should get a parameter (index of the column)
     // appaned columns to the #main
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 828a468e1ee57ba7e2b40e7e1ff160cb757c4b6f
     var html = '';
     $('.columns').remove();
     html += '<div class="columns">';    
@@ -154,7 +150,6 @@ var showProject = function() {
     html += '<div style="clear:both;"></div></div>';
     $('#main').append(html);
     
-<<<<<<< HEAD
     /**** SHOW ISSUES ****/
     // show issues for all the columns
     /*
@@ -176,8 +171,6 @@ var issueModal = function(index) {
 
 
 var moveModal = function(cIndex, iIndex) {
-=======
->>>>>>> 828a468e1ee57ba7e2b40e7e1ff160cb757c4b6f
     
 };
 
