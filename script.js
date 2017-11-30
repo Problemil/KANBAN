@@ -181,6 +181,7 @@ var moveModal = function(cIndex, iIndex) {
     
 };
 
+
 var addLog = function(text) {
     projects[projectID].logbok.push(text);
     localStorage.setItem('projects', JSON.stringify(projects));
@@ -189,3 +190,4 @@ var addLog = function(text) {
 var showLog = function() {
     console.dir(projects[projectID].logbok);
 };
+

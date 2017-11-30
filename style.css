@@ -193,11 +193,15 @@ input, select {
 
 .columns {
     width: 100%;   
+    
 }
 
 .column {
     float: left; vertical-align: top;
     width: 23%; margin: 0px 1%; font-size: 0.85em;
+    background-color: salmon;
+    height: 300px;
+    
 }
 
 .issue {
