@@ -108,7 +108,6 @@ var createProject = function() {
         closeModal();
     }
 };
-
  
 var showProjects = function() {
     var html = '';
@@ -137,10 +136,10 @@ var showColumns = function(){
 };
 
 var showProject = function() {
-    
     showColumns();
     showIssues();
     showLog();
+    
     console.log(projects[projectID]);
     
     /**** SHOW COLUMNS ****/
@@ -168,6 +167,9 @@ var showProject = function() {
     //
 };
 
+var showIssues = function(index) {
+    
+};
 
 var issueModal = function(index) {
     
