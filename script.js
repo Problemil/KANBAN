@@ -141,7 +141,40 @@ var showProject = function() {
     showLog();
 };
 
-var showIssues = function() {
+// var showIssues = function() {
+//     var project = projects[projectID];
+
+//     for(var column in project.columns) {
+//         var html = '';
+//         for (var issueid of project.columns[column]) {
+//             var temp = project.issues[issueid];
+//             html =+ '<div class="issue">';
+//             html =+ '<div class="title">['+(issueid + 1)+'] '+users[temp.user].name;
+//             html =+ '<span onclick="moveModal('+column+', '+issueid+')"><i class="fa fa-pencil-square-o"></i> Flytta</span></div>';
+//             html =+ '<div class="text">'+temp.text+'</div></div>';
+           
+//             }
+//             $('.column').eq(column).append(html);
+//         }
+         var showIssues = function() {
+             var project = projects[projectID];
+         for(var column in project.columns) {
+                var html = '';
+                for(var issueid of project.columns[column]) {
+                  var temp = project.issues[issueid];
+                   html += '<div class="issue">';
+                   html += '<div class="title">['+(issueid + 1)+'] '+users[temp.user].name;
+                     html += '<span onclick="moveModal('+column+', '+issueid+')"><i class="fa fa-pencil-square-o"></i> Flytta</span></div>';
+                    html += '<div class="text">'+temp.text+'</div></div>';
+               }
+              $('.column').eq(column).append(html);
+             }
+        //  };    
+
+
+
+
+
     /**** SHOW ISSUES ****/
     // show issues for all the columns
     /*
@@ -150,7 +183,10 @@ var showIssues = function() {
             <div class="text">Axdasd sad sdad sad Axdasd sad sdad sad</div>
         </div>
     */
-    // $('.column').eq(0).append(issue);
+    // 
+
+
+
 };
 
 var issueModal = function(column) {
