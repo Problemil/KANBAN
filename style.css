@@ -243,6 +243,7 @@ input, select {
 
 @media (max-width: 384px) {
     .project { width: 98%; font-size: 1.5em; }
+            
 }
 
 @media (min-width: 385px) and (max-width: 414px) {
