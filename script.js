@@ -198,7 +198,18 @@ var addIssue = function(column) {
 };
 
 var moveModal = function(cIndex, iIndex) {
-    
+    var content, title = 'Flytta issue';
+    content  = '<label>Flytta till</label>';
+    content += '<select id="kolumner">';
+    var kolumner = ['Att göra', 'På gång', 'Testa', 'Klar'];
+    for(var key in kolumner) {
+        if(cIndex == key) content += '<option value="'+key+'" selected> '+kolumner[key]+'</option>';
+        else content += '<option value="'+key+'"> '+kolumner[key]+ '</option>';   
+    }    
+    content += '</select>';
+    content += '<div class="button" onclick="moveIssue('+iIndex+', '+cIndex+')">Flytta issue</div>';
+    showModal(title, content);
+     
 };
 
 var addLog = function(text) {
