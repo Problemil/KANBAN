@@ -39,7 +39,7 @@ $(document).ready(function(){
     });
     
     $(document).on('keypress', 'input, select', function(event){
-        var keyCode = event.keyCode || event.which; console.log(keyCode);
+        var keyCode = event.keyCode || event.which;
         if(keyCode == 13) $(this).closest('.mhtml').find('.button').click();
     });
 });
@@ -222,6 +222,7 @@ var moveIssue = function(column, issue) {
         showIssue(till, issue);
         var temp = ['Att göra', 'På gång', 'Testa', 'Klar'];
         addLog('flyttade issue #'+(issue + 1)+' från "'+temp[column]+'" till "'+temp[till]+'"');
+        showMessage('success', 'Issue #'+(issue + 1)+' flyttades från "'+temp[column]+'" till "'+temp[till]+'"');
     }
     closeModal();
 };
