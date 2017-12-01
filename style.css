@@ -35,7 +35,7 @@ input, select {
 
 .button {
     text-align: center; margin: 5px auto;
-    height: 30px; line-height: 30px; width: 60%; transition: 0.25s;
+    height: 35px; line-height: 35px; width: 50%; transition: 0.25s;
     background-color: #2196f3; font-size: 1.2em; padding: 0px 10px;
     cursor: pointer; color: #fff; border-radius: 3px;
 }
@@ -140,6 +140,12 @@ input, select {
     font-size: 0.9em;
 }
 
+.mhtml p {
+    margin: 0px;
+    color: #1616ca;
+    padding-bottom: 10px;
+}
+
 #main {
     max-width: 1024px;
     width: 100%; margin: 0px auto;
@@ -185,14 +191,14 @@ input, select {
     background-color: #555;
 }
 
-.pactive {
+.active {
     pointer-events: none;
     background-color: #555;
 }
 
 
 .columns {
-    width: 100%;   
+    width: 100%; margin-top: 50px;  
 }
 
 .column {
@@ -223,7 +229,7 @@ input, select {
 .issue .text {
     padding: 3px;
     font-size: 1.25em;
-    color: #a4c9d8;
+    color: #8bddff;
 }
 
 .logbok {
@@ -235,11 +241,18 @@ input, select {
     margin: 0px; padding: 2px;
 }
 
+@media (max-width: 560px) {
+    .column { width: 98%; margin-top: 25px; }
+}
 
+@media (min-width: 561px) and (max-width: 1050px) {
+    .column { width: 48%; }
+    .column:nth-child(3), .column:nth-child(4) { margin-top: 25px; }
+}
 
-
-
-
+@media (max-width: 480px) {
+    .logbok p { font-size: 0.75em; }
+}
 
 @media (max-width: 384px) {
     .project { width: 98%; font-size: 1.5em; }
