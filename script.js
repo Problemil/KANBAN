@@ -37,6 +37,11 @@ $(document).ready(function(){
         showIssues();
         showLog();
     });
+    
+    $(document).on('keypress', 'input, select', function(event){
+        var keyCode = event.keyCode || event.which; console.log(keyCode);
+        if(keyCode == 13) $(this).closest('.mhtml').find('.button').click();
+    });
 });
 
 // status: error eller success
