@@ -30,10 +30,12 @@ $(document).ready(function(){
     }
     
     $(document).on('click', '.project', function(){
-        $('.project').removeClass('pactive');
-        $(this).addClass('pactive');
+        $('.project').removeClass('active');
+        $(this).addClass('active');
         projectID = $(this).index();
-        showProject();
+        showColumns();
+        showIssues();
+        showLog();
     });
 });
 
@@ -120,7 +122,7 @@ var showProjects = function() {
     } else html += '<p class="center">Det finns inget projekt!</p>';
     
     $('#pcontent').html(html);
-    if(projectID != undefined) $('.project').eq(projectID).addClass('pactive');
+    if(projectID != undefined) $('.project').eq(projectID).addClass('active');
 };
 
 var showColumns = function(){
@@ -135,24 +137,22 @@ var showColumns = function(){
     $('#main').append(html);  
 };
 
-var showProject = function() {
-    showColumns();
-    showIssues();
-    showLog();
+var showIssue = function(column, issue) {
+    var temp = projects[projectID].issues[issue];
+    var html = '<div class="issue">';
+    html += '<div class="title">['+(issue + 1)+'] '+users[temp.user].name;
+    html += '<span onclick="moveModal('+column+', '+issue+')">';
+    html += '<i class="fa fa-arrows-h"></i> Flytta</span></div>';
+    html += '<div class="text">'+temp.text+'</div></div>';
+    $('.column').eq(column).append(html);
 };
 
 var showIssues = function() {
     var project = projects[projectID];
     for(var column in project.columns) {
-        var html = '';
-        for(var issueid of project.columns[column]) {
-            var temp = project.issues[issueid];
-            html += '<div class="issue">';
-            html += '<div class="title">['+(issueid + 1)+'] '+users[temp.user].name;
-            html += '<span onclick="moveModal('+column+', '+issueid+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
-            html += '<div class="text">'+temp.text+'</div></div>';
+        for(var issue of project.columns[column]) {
+            showIssue(column, issue);
         }
-        $('.column').eq(column).append(html);
     }
 };
 
@@ -178,19 +178,12 @@ var addIssue = function(column) {
         var userid = $('#user').val();
         if(userid == '') showMessage('error', 'Välj användare');
         else {
-            var html = '';
             var temp = {text: issue, user: userid};
             projects[projectID].issues.push(temp);
             temp = projects[projectID].issues.length - 1;
             projects[projectID].columns[column].push(temp);
             addLog('skapade issue #'+ (temp + 1));
-
-            html += '<div class="issue">';
-            html += '<div class="title">['+(temp + 1)+'] '+users[userid].name;
-            html += '<span onclick="moveModal('+column+', '+temp+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
-            html += '<div class="text">'+issue+'</div></div>';
-            $('.column').eq(column).append(html);
-            
+            showIssue(column, temp);
             showMessage('success', 'Issue skapades');
             closeModal();
         }
@@ -199,12 +192,14 @@ var addIssue = function(column) {
 
 var moveModal = function(cIndex, iIndex) {
     var content, title = 'Flytta issue';
-    var kolumner = ['Att göra', 'På gång', 'Testa', 'Klar'];
-    content  = '<label>Flytta till</label>';
+    var temp = projects[projectID].issues[iIndex];
+    content  = '<p><i class="fa fa-chevron-right"></i> '+temp.text+'</p>';
+    temp     = ['Att göra', 'På gång', 'Testa', 'Klar'];
+    content += '<label>Flytta till</label>';
     content += '<select id="kolumner">';
-    for(var key in kolumner) {
-        if(cIndex == key) content += '<option value="'+key+'" selected> '+kolumner[key]+'</option>';
-        else content += '<option value="'+key+'"> '+kolumner[key]+'</option>';
+    for(var key in temp) {
+        if(cIndex == key) content += '<option value="'+key+'" selected> '+temp[key]+'</option>';
+        else content += '<option value="'+key+'"> '+temp[key]+'</option>';
     }    
     content += '</select>';
     content += '<div class="button" onclick="moveIssue('+cIndex+', '+iIndex+')">Flytta issue</div>';
@@ -215,20 +210,13 @@ var moveIssue = function(column, issue) {
     var project = projects[projectID];
     var till = Number($('#kolumner').val());
     if(column != till) {
-        var html  = '', temp;
         var index = project.columns[column].indexOf(issue);
         project.columns[column].splice(index, 1);
         project.columns[till].push(issue);
         $('.column').eq(column).children('.issue').eq(index).remove();
-        temp = projects[projectID].issues[issue];
-        html += '<div class="issue">';
-        html += '<div class="title">['+(issue + 1)+'] '+users[temp.user].name;
-        html += '<span onclick="moveModal('+till+', '+issue+')"><i class="fa fa-arrows-h"></i> Flytta</span></div>';
-        html += '<div class="text">'+temp.text+'</div></div>';
-        $('.column').eq(till).append(html);
-        
+        showIssue(till, issue);
         var temp = ['Att göra', 'På gång', 'Testa', 'Klar'];
-        addLog('flyttade issue #'+(issue + 1)+' från kolumn "'+temp[column]+'" till kolumn "'+temp[till]+'"');
+        addLog('flyttade issue #'+(issue + 1)+' från "'+temp[column]+'" till "'+temp[till]+'"');
     }
     closeModal();
 };
